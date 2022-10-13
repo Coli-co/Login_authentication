@@ -1,0 +1,40 @@
+h2 {
+  color: blue;
+  text-align: center;
+}
+
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  /* width: 100%; */
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.sign {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signbtn {
+  background-color: rgb(228, 228, 10);
+  border: 1px solid rgb(228, 228, 10);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+button:hover {
+  cursor: pointer;
+}
