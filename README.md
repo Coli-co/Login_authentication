@@ -40,6 +40,6 @@ npm install
 npm run start
 ```
 
-Develper
+### Developer
 
 - [Timothy](https://github.com/Coli-co)

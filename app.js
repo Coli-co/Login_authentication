@@ -25,7 +25,6 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   const { email, password } = req.body
-
   const user = checkUser(email, password)
 
   if (user) {
