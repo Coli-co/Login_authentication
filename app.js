@@ -4,8 +4,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const users = require('./public/user.json')
-const checkUser = require('./auth')
+const { checkUser, checkLoginStatus } = require('./auth')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -37,6 +36,11 @@ app.post('/', (req, res) => {
   return res.send(
     'Invalid email or password, please check your input correctly!'
   )
+})
+
+app.get('/welcome', checkLoginStatus, (req, res) => {
+  const user = req.session.user
+  return res.render('welcome', { user })
 })
 
 app.listen(port, () => {
