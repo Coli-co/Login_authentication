@@ -2,14 +2,41 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const users = require('./public/user.json')
+const checkUser = require('./auth')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(
+  session({
+    secret: 'first-try',
+    resave: true,
+    saveUninitialized: false
+  })
+)
 
 app.get('/', (req, res) => {
-  res.render('index')
+  return res.render('index')
+})
+
+app.post('/', (req, res) => {
+  const { email, password } = req.body
+
+  const user = checkUser(email, password)
+
+  if (user) {
+    req.session.user = user.firstName
+
+    return res.send(`Welcome, ${user.firstName}.`)
+  }
+  return res.send(
+    'Invalid email or password, please check your input correctly!'
+  )
 })
 
 app.listen(port, () => {
